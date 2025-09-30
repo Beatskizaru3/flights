@@ -1,0 +1,50 @@
+:root{
+    --main-color: rgb(49, 49, 122);
+    --bgc-color: #e1e1e1
+}
+
+body{
+    background-color: var(--bgc-color);
+}
+
+.header-custom{
+    background-color: var(--main-color)
+}
+
+.btn-primary{
+    background-color: var(--main-color);
+    border: none;
+}
+
+.city{
+    position: relative;
+}
+
+.city::after{
+    position: absolute;
+    content: url('../../public/pin-svgrepo-com.svg');
+    right: 1rem;
+    top: 18%;
+}
+
+.form-label{
+    margin-bottom: 0;
+}
+
+.filterName-title{
+    color: var(--main-color);
+    font-weight: 600;
+}
+
+.row-name{
+    color: var(--main-color);
+}
+
+.rows-names{
+    background-color: var(--bgc-color);
+}
+
+.flight-card-button-details{
+   
+    
+}
