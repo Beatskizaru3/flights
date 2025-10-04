@@ -24,7 +24,7 @@
   <body>
     <header class="header-custom">
       <div
-        class="d-flex flex-row justify-content-between text-white p-4 container align-items-center"
+        class="header-container d-flex flex-row justify-content-between text-white p-4 container align-items-center"
       >
         <div class="fs-4">Flights - Search List</div>
         <div class="fs-6">Home / Flights Search List</div>
@@ -114,258 +114,224 @@
         </div>
       </form>
       <section class="row gap-4 choosing-flight">
-        <aside
-          class="filter col d-flex flex-column shadow-lg p-4 gap-4 bg-body"
-        >
-          <h4 class="filter-title fw-bold">Filter</h4>
-
-          <div class="stops-amount">
-            <h5 class="filterName-title fs-6 mb-3">No. of stops</h5>
-            <div class="form-check">
-              <input
-                type="checkbox"
-                name="stops"
-                id="noStops"
-                value="0"
-                class="form-check-input"
-                autocomplete="off"
-              />
-              <label class="form-check-label" for="noStops"> Non stop </label>
-            </div>
-            <div class="form-check">
-              <input
-                type="checkbox"
-                name="stops"
-                id="oneStops"
-                value="1"
-                class="form-check-input"
-                autocomplete="off"
-              />
-              <label class="form-check-label" for="oneStops"> 1 Stop </label>
-            </div>
-            <div class="form-check">
-              <input
-                type="checkbox"
-                name="stops"
-                id="more2Stops"
-                value="2"
-                class="form-check-input"
-                autocomplete="off"
-              />
-              <label class="form-check-label" for="more2Stops">
-                2+ Stops
-              </label>
-            </div>
-          </div>
-          <div class="price">
-            <h5 class="filterName-title fs-6 mb-3">Price</h5>
-            <div class="price-inner d-flex flex-row gap-2">
-              <div class="price-inner-gap d-flex flex-column">
-                <span class="min">Min:</span>
-                <div
-                  class="price-inner-body d-flex flex-row align-items-center gap-2"
-                >
-                  <input
-                    class="form-control"
-                    type="text"
-                    name="price"
-                    id="minPrice"
-                    value="0"
-                    autocomplete="off"
-                  />
-                  <span>$</span><span>-</span>
+        <aside class="filter col bg-body">
+          <div class="filter-item">
+            <h2 class="filter-header">
+              <button
+                class="filter-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                Filter
+              </button>
+            </h2>
+            <div
+              id="collapseOne"
+              class="filter-collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="filter-body">
+                <div class="stops-amount">
+                  <h5 class="filterName-title fs-6 mb-3">No. of stops</h5>
+                  <div class="form-check">
+                    <input
+                      type="checkbox"
+                      name="stops"
+                      id="noStops"
+                      value="0"
+                      class="form-check-input"
+                      autocomplete="off"
+                    />
+                    <label class="form-check-label" for="noStops">
+                      Non stop
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      type="checkbox"
+                      name="stops"
+                      id="oneStops"
+                      value="1"
+                      class="form-check-input"
+                      autocomplete="off"
+                    />
+                    <label class="form-check-label" for="oneStops">
+                      1 Stop
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      type="checkbox"
+                      name="stops"
+                      id="more2Stops"
+                      value="2"
+                      class="form-check-input"
+                      autocomplete="off"
+                    />
+                    <label class="form-check-label" for="more2Stops">
+                      2+ Stops
+                    </label>
+                  </div>
                 </div>
-              </div>
-              <div class="price-inner-gap d-flex flex-column">
-                <span class="max">Max:</span>
-                <div
-                  class="price-inner-body d-flex flex-row align-items-center gap-2"
-                >
-                  <input
-                    class="form-control"
-                    type="text"
-                    name="price"
-                    id="maxPrice"
-                    value="9999"
-                    autocomplete="off"
-                  />
-                  <span>$</span>
+                <div class="price">
+                  <h5 class="filterName-title fs-6 mb-3">Price</h5>
+                  <div class="price-inner d-flex flex-row gap-2">
+                    <div class="price-inner-gap d-flex flex-column">
+                      <span class="min">Min:</span>
+                      <div
+                        class="price-inner-body d-flex flex-row align-items-center gap-2"
+                      >
+                        <input
+                          class="form-control"
+                          type="text"
+                          name="price"
+                          id="minPrice"
+                          value="0"
+                          autocomplete="off"
+                        />
+                        <span>$</span><span>-</span>
+                      </div>
+                    </div>
+                    <div class="price-inner-gap d-flex flex-column">
+                      <span class="max">Max:</span>
+                      <div
+                        class="price-inner-body d-flex flex-row align-items-center gap-2"
+                      >
+                        <input
+                          class="form-control"
+                          type="text"
+                          name="price"
+                          id="maxPrice"
+                          value="9999"
+                          autocomplete="off"
+                        />
+                        <span>$</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="airlines">
-            <h5 class="filterName-title fs-6 mb-3">Airlines</h5>
-            <div class="airlines-list">
-              <div class="form-check">
-                <input
-                  type="checkbox"
-                  name="Airlines"
-                  value="Asiana Airlines"
-                  id="asiana-airlines"
-                  class="form-check-input"
-                  autocomplete="off"
-                />
-                <label class="form-check-label" for="asiana-airlines">
-                  Asiana Airlines
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  type="checkbox"
-                  name="Airlines"
-                  value="American Airlines"
-                  id="american-airlines"
-                  class="form-check-input"
-                  autocomplete="off"
-                />
-                <label class="form-check-label" for="american-airlines">
-                  American Airlines
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  type="checkbox"
-                  name="Airlines"
-                  value="Air Canada"
-                  id="air-canada"
-                  class="form-check-input"
-                  autocomplete="off"
-                />
-                <label class="form-check-label" for="air-canada">
-                  Air Canada
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  type="checkbox"
-                  name="Airlines"
-                  value="Air India"
-                  id="air-india"
-                  class="form-check-input"
-                  autocomplete="off"
-                />
-                <label class="form-check-label" for="air-india">
-                  Air India
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  type="checkbox"
-                  name="Airlines"
-                  value="Jet Airways"
-                  id="jet-airways"
-                  class="form-check-input"
-                  autocomplete="off"
-                />
-                <label class="form-check-label" for="jet-airways">
-                  Jet Airways
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  type="checkbox"
-                  name="Airlines"
-                  value="SpiceJet"
-                  id="spice-jet"
-                  class="form-check-input"
-                  autocomplete="off"
-                />
-                <label class="form-check-label" for="spice-jet">
-                  SpiceJet
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  type="checkbox"
-                  name="Airlines"
-                  value="IndiGo"
-                  id="indi-go"
-                  class="form-check-input"
-                  autocomplete="off"
-                />
-                <label class="form-check-label" for="indi-go"> IndiGo </label>
-              </div>
-              <div class="form-check">
-                <input
-                  type="checkbox"
-                  name="Airlines"
-                  value="Multiple Airlines"
-                  id="multiple-airlines"
-                  class="form-check-input"
-                  autocomplete="off"
-                />
-                <label class="form-check-label" for="multiple-airlines">
-                  Multiple Airlines
-                </label>
+                <div class="airlines">
+                  <h5 class="filterName-title fs-6 mb-3">Airlines</h5>
+                  <div class="airlines-list">
+                    <div class="form-check">
+                      <input
+                        type="checkbox"
+                        name="Airlines"
+                        value="Asiana Airlines"
+                        id="asiana-airlines"
+                        class="form-check-input"
+                        autocomplete="off"
+                      />
+                      <label class="form-check-label" for="asiana-airlines">
+                        Asiana Airlines
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        type="checkbox"
+                        name="Airlines"
+                        value="American Airlines"
+                        id="american-airlines"
+                        class="form-check-input"
+                        autocomplete="off"
+                      />
+                      <label class="form-check-label" for="american-airlines">
+                        American Airlines
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        type="checkbox"
+                        name="Airlines"
+                        value="Air Canada"
+                        id="air-canada"
+                        class="form-check-input"
+                        autocomplete="off"
+                      />
+                      <label class="form-check-label" for="air-canada">
+                        Air Canada
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        type="checkbox"
+                        name="Airlines"
+                        value="Air India"
+                        id="air-india"
+                        class="form-check-input"
+                        autocomplete="off"
+                      />
+                      <label class="form-check-label" for="air-india">
+                        Air India
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        type="checkbox"
+                        name="Airlines"
+                        value="Jet Airways"
+                        id="jet-airways"
+                        class="form-check-input"
+                        autocomplete="off"
+                      />
+                      <label class="form-check-label" for="jet-airways">
+                        Jet Airways
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        type="checkbox"
+                        name="Airlines"
+                        value="SpiceJet"
+                        id="spice-jet"
+                        class="form-check-input"
+                        autocomplete="off"
+                      />
+                      <label class="form-check-label" for="spice-jet">
+                        SpiceJet
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        type="checkbox"
+                        name="Airlines"
+                        value="IndiGo"
+                        id="indi-go"
+                        class="form-check-input"
+                        autocomplete="off"
+                      />
+                      <label class="form-check-label" for="indi-go">
+                        IndiGo
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        type="checkbox"
+                        name="Airlines"
+                        value="Multiple Airlines"
+                        id="multiple-airlines"
+                        class="form-check-input"
+                        autocomplete="off"
+                      />
+                      <label class="form-check-label" for="multiple-airlines">
+                        Multiple Airlines
+                      </label>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </aside>
         <div class="results col-9 bg-body shadow-lg">
-          <h3 class="fw-bold mx-auto my-5 text-center">
-            <span class="cityNow">Dehli</span> to
-            <span class="cityArrive">Sydney</span>
-          </h3>
-          <div
-            class="rows-names row row-cols-6 p-3 border border-start-0 border-end-0 border-dark"
-          >
-            <span class="fw-bold row-name col text-center">Airlines</span>
-            <span class="fw-bold row-name col text-center">Departure</span>
-            <span class="fw-bold row-name col text-center">Duration</span>
-            <span class="fw-bold row-name col text-center">Arrival</span>
-            <span class="fw-bold row-name col text-center">Price</span>
-          </div>
-          <div class="flight-cards d-flex flex-column">
-            <div class="flight-card row row-cols-6 p-3 border-bottom">
-              <div
-                class="flight-card-airline d-flex flex-column text-center justify-content-center"
-              >
-                <span class="flight-card-airline-name">IndiGo</span>
-                <span class="flight-card-airline-number text-secondary"
-                  >6E-2341</span
-                >
-              </div>
-              <div
-                class="flight-card-departure d-flex flex-column text-center justify-content-center"
-              >
-                <span class="flight-card-departure-time">23:30</span>
-                <span class="flight-card-departure-city text-secondary"
-                  >Delhi</span
-                >
-              </div>
-              <div
-                class="flight-card-duration d-flex flex-column text-center justify-content-center"
-              >
-                <span class="flight-card-duration-time">18h 55m</span>
-                <span class="flight-card-duration-stops text-secondary">
-                  Non stop
-                </span>
-              </div>
-              <div
-                class="flight-card-arrival d-flex flex-column text-center justify-content-center"
-              >
-                <span class="flight-card-arrival-time">18:15</span>
-                <span class="flight-card-arrival-city text-secondary"
-                  >Sydney</span
-                >
-              </div>
-              <div
-                class="flight-card-price justify-content-center d-flex align-items-center"
-              >
-                $<span class="flight-card-price-amount">980</span>
-              </div>
-              <div
-                class="flight-card-button justify-content-center flex-column gap-1 d-grid align-items-center"
-              >
-                <button class="flight-card-button-btn btn btn-primary">
-                  Book
-                </button>
-                <a href="#" class="flight-card-button-details text-primary fs-6"
-                  >Flight details</a
-                >
-              </div>
-            </div>
+          <div class="results-wait">
+            <img src="../../public/smile.webp" alt="Waiting for your request" />
+            <span class="results-wait-span"
+              >We are waiting to your request</span
+            >
           </div>
         </div>
       </section>

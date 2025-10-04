@@ -4,15 +4,22 @@ let requestData;
 
 const formEl = document.getElementById("searchForm");
 
-let searchResult; // для резульатата по поиску
+let searchResult; // для резульатата по поиску -Б 193строка
+
+let departureCityRequest;
+let arriveCityRequest;
+
+const resultOnLoad = document.querySelector(".results");
+if (window.innerWidth < 992) {
+  if (resultOnLoad.classList.contains("col-9")) {
+    resultOnLoad.classList.remove("col-9");
+  }
+}
 
 function findMatches(requestData) {
-  const cityNow = document.querySelector(".cityNow");
-  const cityArrive = document.querySelector(".cityArrive");
-
   const way = requestData.get("ways");
-  const departureCity = requestData.get("CityFrom");
-  const arriveCity = requestData.get("CityTo");
+  departureCityRequest = requestData.get("CityFrom");
+  arriveCityRequest = requestData.get("CityTo");
   const startDate = requestData.get("startDate").toString();
 
   let endDate = requestData.get("backDate");
@@ -22,15 +29,12 @@ function findMatches(requestData) {
 
   const flightClass = parseInt(requestData.get("selectClass"));
 
-  cityNow.textContent = departureCity;
-  cityArrive.textContent = arriveCity;
-
   let resultArr = [];
 
   resultArr = MOCK_FLIGHTS.filter((race) => {
     if (
-      race.departureCity === departureCity &&
-      race.arrivalCity === arriveCity &&
+      race.departureCity === departureCityRequest &&
+      race.arrivalCity === arriveCityRequest &&
       race.departureDate === startDate &&
       race.classValue === flightClass
     ) {
@@ -54,10 +58,93 @@ function findMatches(requestData) {
 }
 
 function renderResult(racesArr) {
-  const flightsList = document.querySelector(".flight-cards");
-  while (flightsList.firstChild) {
-    flightsList.removeChild(flightsList.firstChild);
+  const results = document.querySelector(".results");
+  while (results.firstChild) {
+    results.removeChild(results.firstChild);
   }
+
+  const resultsTitle = document.createElement("h3");
+  resultsTitle.classList.add("fw-bold", "mx-auto", "my-5", "text-center");
+
+  const cityNow = document.createElement("span");
+  const cityArrive = document.createElement("span");
+
+  cityNow.textContent = departureCityRequest;
+  cityArrive.textContent = arriveCityRequest;
+  cityNow.classList.add("cityNow");
+  cityArrive.classList.add("cityArrive");
+  resultsTitle.append(cityNow);
+  resultsTitle.append(document.createTextNode(" to "));
+  resultsTitle.append(cityArrive);
+
+  results.append(resultsTitle);
+
+  const rowsNames = document.createElement("div");
+  rowsNames.classList.add(
+    "rows-names",
+    "row",
+    "p-3",
+    "border",
+    "border-start-0",
+    "border-end-0",
+    "border-dark"
+  );
+  const airLinesRow = document.createElement("span");
+  const departureRow = document.createElement("span");
+  const durationRow = document.createElement("span");
+  const arrivalRow = document.createElement("span");
+  const priceRow = document.createElement("span");
+
+  airLinesRow.textContent = "Airlines";
+  departureRow.textContent = "Departure";
+  durationRow.textContent = "Duration";
+  arrivalRow.textContent = "Arrival";
+  priceRow.textContent = "Price";
+
+  airLinesRow.classList.add(
+    "small-hidden",
+    "fw-bold",
+    "row-name",
+    "col",
+    "text-center"
+  );
+  departureRow.classList.add("fw-bold", "row-name", "col", "text-center");
+  durationRow.classList.add("fw-bold", "row-name", "col", "text-center");
+  arrivalRow.classList.add("fw-bold", "row-name", "col", "text-center");
+  priceRow.classList.add("fw-bold", "row-name", "col", "text-center");
+
+  rowsNames.append(
+    airLinesRow,
+    departureRow,
+    durationRow,
+    arrivalRow,
+    priceRow
+  );
+
+  if (window.innerWidth < 992) {
+    rowsNames.classList.remove("row-cols-5");
+    rowsNames.classList.remove("row-cols-4");
+    rowsNames.classList.add("row-cols-6");
+    if (window.innerWidth < 768) {
+      rowsNames.classList.remove("row-cols-6");
+      rowsNames.classList.add("row-cols-5");
+    }
+    if (window.innerWidth < 425) {
+      rowsNames.classList.remove("row-cols-6");
+      rowsNames.classList.remove("row-cols-5");
+      rowsNames.classList.add("row-cols-4");
+    }
+  } else {
+    rowsNames.classList.remove("row-cols-5");
+    rowsNames.classList.remove("row-cols-4");
+    rowsNames.classList.add("row-cols-6");
+  }
+
+  results.append(rowsNames);
+
+  const flightsList = document.createElement("div");
+  flightsList.classList.add("flight-cards");
+
   racesArr.forEach((element) => {
     const card = document.createElement("div");
     card.classList.add(
@@ -68,13 +155,42 @@ function renderResult(racesArr) {
       "border-bottom"
     );
 
+    if (window.innerWidth < 992) {
+      if (card.classList.contains("row-cols-5")) {
+        card.classList.remove("row-cols-5");
+      }
+      if (!card.classList.contains("row-cols-6")) {
+        card.classList.add("row-cols-6");
+      }
+      if (window.innerWidth < 768) {
+        if (card.classList.contains("row-cols-6")) {
+          card.classList.remove("row-cols-6");
+        }
+        if (!card.classList.contains("row-cols-5")) {
+          card.classList.add("row-cols-5");
+        }
+        if (window.innerWidth < 425) {
+          if (card.classList.contains("row-cols-6")) {
+            card.classList.remove("row-cols-6");
+          }
+          if (card.classList.contains("row-cols-5")) {
+            card.classList.remove("row-cols-5");
+          }
+          if (!card.classList.contains("row-cols-4")) {
+            card.classList.add("row-cols-4");
+          }
+        }
+      }
+    }
+
     const airlines = document.createElement("div");
     airlines.classList.add(
       "flight-card-airline",
       "d-flex",
       "flex-column",
       "text-center",
-      "justify-content-center"
+      "justify-content-center",
+      "small-hidden"
     );
     const airlineName = document.createElement("span");
     const airlineNumber = document.createElement("span");
@@ -110,7 +226,7 @@ function renderResult(racesArr) {
     );
     const flightDurationTime = document.createElement("span");
     flightDurationTime.classList.add("flight-card-duration-time");
-    flightDuration.textContent = element.duration;
+    flightDurationTime.textContent = element.duration;
     const flightDurationStops = document.createElement("span");
     flightDurationStops.classList.add(
       "flight-card-duration-stops",
@@ -182,6 +298,8 @@ function renderResult(racesArr) {
     1;
     flightsList.append(card);
   });
+
+  results.append(flightsList);
 }
 
 formEl.addEventListener("submit", (event) => {
@@ -190,7 +308,7 @@ formEl.addEventListener("submit", (event) => {
   const formData = new FormData(formEl);
   requestData = formData;
   console.log(requestData);
-  searchResult = findMatches(requestData);
+  searchResult = findMatches(requestData); // сохраняем результатм запроса в пременуую
   renderResult(searchResult);
 });
 
@@ -259,6 +377,7 @@ function applyFilter(searchResult, filterObject) {
 }
 
 function updateRender(currentFilterObj) {
+  // вызываем при каждом изменеии фильтра
   const finalResults = applyFilter(searchResult, currentFilterObj);
   renderResult(finalResults);
 }
@@ -291,7 +410,7 @@ function useFilters() {
           filterObj.stops = getStopsValues;
         }
       }
-      updateRender(filterObj);
+      updateRender(filterObj); // перерендериваем при изменении фильтров
       console.log(filterObj);
     });
   });
@@ -305,7 +424,7 @@ function useFilters() {
         } else if (e.target.id === "maxPrice") {
           filterObj.maxPrice = e.target.value;
         }
-        updateRender(filterObj);
+        updateRender(filterObj); // перерендериваем при изменении фильтров
         console.log(filterObj);
       }, 3000);
     });
@@ -324,7 +443,7 @@ function useFilters() {
           filterObj.airlines = getAirlinesValues;
         }
       }
-      updateRender(filterObj);
+      updateRender(filterObj); // перерендериваем при изменении фильтров
       console.log(filterObj);
       return filterObj;
     });
